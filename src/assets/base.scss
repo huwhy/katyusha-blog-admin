@@ -1,0 +1,98 @@
+//线条
+@mixin line($left, $bottom, $right, $width) {
+  content: " ";
+  position: absolute;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+  height: 1px;
+  background: rgb(204, 204, 204);
+  width: $width;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+//定义为flex容器t
+@mixin flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+//行内flex容器
+@mixin inline_flex {
+  display: inline-flex;
+}
+
+//flex 项目占比
+@mixin item_flex($value: 1) {
+  -webkit-box-flex: $value;
+  -webkit-flex: $value;
+  flex: $value;
+}
+
+//项目垂直排列 row | column
+@mixin flex_direct($value: row) {
+  -webkit-flex-direction: $value;
+  -moz-flex-direction: $value;
+  -ms-flex-direction: $value;
+  -o-flex-direction: $value;
+  flex-direction: $value;
+}
+
+//项目在主轴上居中对齐 flex-start | flex-end | center | space-between | space-around;
+@mixin flex_justify_content($value: center) {
+  /* 09版 */
+  -webkit-box-pack: $value;
+  /* 12版 */
+  -webkit-justify-content: $value;
+  -moz-justify-content: $value;
+  -ms-justify-content: $value;
+  -o-justify-content: $value;
+  justify-content: $value;
+}
+
+//项目在交叉轴上如何对齐 flex-start | flex-end | center | baseline | stretch;
+@mixin flex_align_items($value: center) {
+  /* 09版 */
+  -webkit-box-align: $value;
+  /* 12版 */
+  -webkit-align-items: $value;
+  -moz-align-items: $value;
+  -ms-align-items: $value;
+  -o-align-items: $value;
+  align-items: $value;
+}
+
+//单位转换 象素转换成rem
+@function toRem($value) {
+  @return ($value / 75) + rem;
+}
+
+@mixin size($width,$height) {
+  width: toRem($width);
+  height: toRem($height);
+}
+
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@mixin ellipsis2($line: 2) {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+@mixin radius($value){
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
+}
