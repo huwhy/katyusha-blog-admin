@@ -2,25 +2,19 @@ const state = {
   tabViews: [],
   tabNames: {
     '/': '首页',
+    '/home': '首页',
     '/index': '首页',
-    '/category': '文章类目',
+    '/banner': '轮播广告',
     '/article': '文章',
     '/article/add': '添加文章',
-    '/link': '链接管理',
-    '/mp-config': '公众号配置',
-    '/mp-config/add': '添加公众号配置',
-    '/mp-menu': '公众号菜单',
-    '/mp-reply': '自动回复设置',
-    '/mp-reply/add': '添加回复'
+    '/about': '公司介绍',
+    '/system': '设置',
+    '/seo': 'SEO'
   },
   tabRegNames: [
     {
       reg: /^\/article\/(\d+)$/,
       name: '编辑文章'
-    },
-    {
-      reg: /^\/mp-config\/(\d+)$/,
-      name: '修改公众号配置'
     }
   ]
 }

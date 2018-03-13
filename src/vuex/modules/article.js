@@ -4,15 +4,18 @@ const state = {
   article: {
     list: [],
     params: {
-      first_id: 0,
-      second_id: 0,
-      third_id: 0,
+      cid: 0,
       title: '',
       page: 1,
       size: 10
     },
     total: 0,
-    temp: {title: '', content: ''}
+    temp: {
+      catId: 0,
+      mainImg: '',
+      title: '',
+      content: ''
+    }
   }
 }
 
@@ -44,6 +47,14 @@ const actions = {
     return new Promise((resolve) => {
       axios.post('/api/article', state.article.temp).then((res) => {
         let json = res.data
+        if (json.code === 200) {
+          state.article.temp = {
+            catId: 0,
+            mainImg: '',
+            title: '',
+            content: ''
+          }
+        }
         resolve(json)
       })
     })
@@ -56,6 +67,14 @@ const actions = {
           commit('ARTICLE_EDIT', json.data)
         }
         resolve(json)
+      })
+    })
+  },
+  ARTICLE_GET ({commit, state}, id) {
+    return new Promise((resolve) => {
+      axios.get('/api/article/' + id).then((res) => {
+        let json = res.data
+        resolve(json.data)
       })
     })
   }

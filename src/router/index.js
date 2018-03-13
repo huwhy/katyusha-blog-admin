@@ -9,11 +9,11 @@ export default new Router({
     {
       path: '/',
       component: resolve => require(['../components/Layout.vue'], resolve),
-      redirect: '/index',
+      redirect: '/home',
       children: [
         {
-          path: '/index',
-          component: resolve => require(['../pages/article/list.vue'], resolve)
+          path: '/home',
+          component: resolve => require(['../pages/Index.vue'], resolve)
         },
         {
           path: '/article',
@@ -28,36 +28,28 @@ export default new Router({
           component: resolve => require(['../pages/article/add.vue'], resolve)
         },
         {
-          path: '/category',
-          component: resolve => require(['../pages/category/list.vue'], resolve)
+          path: '/banner',
+          component: resolve => require(['../pages/banner/list.vue'], resolve)
         },
         {
-          path: '/link',
-          component: resolve => require(['../pages/link/list.vue'], resolve)
+          path: '/banner/add',
+          component: resolve => require(['../pages/banner/add.vue'], resolve)
         },
         {
-          path: '/mp-config',
-          component: resolve => require(['../pages/mp-config/list.vue'], resolve)
+          path: '/banner/:id(\\d+)',
+          component: resolve => require(['../pages/banner/add.vue'], resolve)
         },
         {
-          path: '/mp-config/add',
-          component: resolve => require(['../pages/mp-config/add.vue'], resolve)
+          path: '/about',
+          component: resolve => require(['../pages/about.vue'], resolve)
         },
         {
-          path: '/mp-config/:id(\\d+)',
-          component: resolve => require(['../pages/mp-config/add.vue'], resolve)
+          path: '/system',
+          component: resolve => require(['../pages/system.vue'], resolve)
         },
         {
-          path: '/mp-menu',
-          component: resolve => require(['../pages/mp/menu/index.vue'], resolve)
-        },
-        {
-          path: '/mp-reply',
-          component: resolve => require(['../pages/mp/reply/index.vue'], resolve)
-        },
-        {
-          path: '/mp-reply/add',
-          component: resolve => require(['../pages/mp/reply/add.vue'], resolve)
+          path: '/seo',
+          component: resolve => require(['../pages/seo.vue'], resolve)
         }
       ]
     }

@@ -2,30 +2,32 @@
   <div>
     <div class="box query-box">
       <el-form :inline="true" :model="params" class="demo-form-inline">
-        <el-form-item label="标题">
-          <el-input v-model="params.title" placeholder="标题"></el-input>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
+          <!-- <el-button type="primary" @click="handleDownload">下载</el-button> -->
+          <router-link to="/banner/add">
+            <el-button>添加</el-button>
+          </router-link>
         </el-form-item>
       </el-form>
     </div>
     <el-table
       border
-      :data="categories"
+      :data="banners"
       @cell-mouse-enter="cellMouseEnter"
       style="width: 100%"
       max-height="650">
       <el-table-column fixed prop="id" label="ID" width="150"></el-table-column>
-      <el-table-column prop="name" label="名称" width="220">
-        <div class="name" :alt="scope.row.name" slot-scope="scope">{{scope.row.name}}</div>
+      <el-table-column prop="img" label="IMG" width="220">
+        <template slot-scope="scope">
+          <img :src="scope.row.img" :alt="scope.row.img" width="60" height="60" class="am-img-thumbnail">
+        </template>
       </el-table-column>
-      <el-table-column prop="level" label="级别" width="120"></el-table-column>
-      <el-table-column prop="pid" label="父ID" width="120"></el-table-column>
+      <el-table-column prop="url" label="URL" width="120"></el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button
-            @click.native.prevent="deleteRow(scope.$index)"
+            @click.native.prevent="deleteRow(scope.row.id)"
             type="text"
             size="small">
             移除
@@ -48,11 +50,24 @@
 <script>
 export default {
   methods: {
-    deleteRow (index, rows) {
-      rows.splice(index, 1)
+    deleteRow (id) {
+      this.$store.dispatch('BANNER_DELETE', id).then((res) => {
+        if (res.ok) {
+          this.$message.success('删除成功')
+        }
+      })
     },
     onSubmit () {
-      this.$store.dispatch('CATEGORY_LIST').then((res) => {
+      if (this.params.cid === 0) {
+        this.$message({
+          showClose: true,
+          message: '请选择类别',
+          type: 'warning'
+        })
+        return
+      }
+      this.$store.dispatch('BANNER_PAGE_CHG', 1)
+      this.$store.dispatch('BANNER_LIST').then((res) => {
         console.log(res)
       })
     },
@@ -60,23 +75,23 @@ export default {
       // console.log(row, column, cell, event)
     },
     handleSizeChange (val) {
-      this.$store.dispatch('CATEGORY_SIZE_CHG', val)
-      this.$store.dispatch('CATEGORY_LIST')
+      this.$store.dispatch('BANNER_SIZE_CHG', val)
+      this.$store.dispatch('BANNER_LIST')
     },
     handleCurrentChange (val) {
-      this.$store.dispatch('CATEGORY_PAGE_CHG', val)
-      this.$store.dispatch('CATEGORY_LIST')
+      this.$store.dispatch('BANNER_PAGE_CHG', val)
+      this.$store.dispatch('BANNER_LIST')
     }
   },
   computed: {
     total () {
-      return this.$store.getters.category.total
+      return this.$store.getters.banner.total
     },
     params () {
-      return this.$store.getters.category.params
+      return this.$store.getters.banner.params
     },
-    categories () {
-      return this.$store.getters.category.list
+    banners () {
+      return this.$store.getters.banner.list
     }
   }
 }

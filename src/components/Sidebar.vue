@@ -22,7 +22,7 @@ export default {
       activeIndex: '1',
       menus: [
         {
-          name: '博客',
+          name: '官网',
           index: '/',
           subs: [
             {
@@ -30,30 +30,20 @@ export default {
               index: '/article'
             },
             {
-              name: '类目',
-              index: '/category'
+              name: '轮播广告',
+              index: '/banner'
             },
             {
-              name: '链接',
-              index: '/link'
-            }
-          ]
-        },
-        {
-          name: '公众号设置',
-          index: '/mp',
-          subs: [
-            {
-              name: '公众号配置',
-              index: '/mp-config'
+              name: '公司介绍',
+              index: '/about'
             },
             {
-              name: '公众号菜单设置',
-              index: '/mp-menu'
+              name: '系统设置',
+              index: '/system'
             },
             {
-              name: '自动回复设置',
-              index: '/mp-reply'
+              name: 'SEO设置',
+              index: '/seo'
             }
           ]
         }

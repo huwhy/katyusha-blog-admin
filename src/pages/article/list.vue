@@ -2,12 +2,20 @@
   <div>
     <div class="box query-box">
       <el-form :inline="true" :model="params" class="demo-form-inline">
+        <el-form-item label="类别">
+          <el-select v-model="params.cid" placeholder="请选择">
+            <el-option :key="0" label="请选择" :value="0"></el-option>
+            <el-option :key="1" label="服务项目" :value="1"></el-option>
+            <el-option :key="2" label="工程案例" :value="2"></el-option>
+            <el-option :key="3" label="专业知识" :value="3"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="标题">
           <el-input v-model="params.title" placeholder="标题"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button type="primary" @click="handleDownload">下载</el-button>
+          <!-- <el-button type="primary" @click="handleDownload">下载</el-button> -->
           <router-link to="/article/add">
             <el-button>添加</el-button>
           </router-link>
@@ -24,10 +32,7 @@
       <el-table-column prop="title" label="标题" width="220">
         <div class="title" :alt="scope.row.title" slot-scope="scope">{{scope.row.title}}</div>
       </el-table-column>
-      <el-table-column prop="author" label="作者" width="120"></el-table-column>
-      <el-table-column prop="status" label="状态" width="120"></el-table-column>
-      <el-table-column prop="tags" label="标签" width="120"></el-table-column>
-      <el-table-column prop="views" label="浏览" width="120"></el-table-column>
+      <el-table-column prop="viewNum" label="浏览量" width="120"></el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button
@@ -65,6 +70,14 @@ export default {
       rows.splice(index, 1)
     },
     onSubmit () {
+      if (this.params.cid === 0) {
+        this.$message({
+          showClose: true,
+          message: '请选择类别',
+          type: 'warning'
+        })
+        return
+      }
       this.$store.dispatch('ARTICLE_PAGE_CHG', 1)
       this.$store.dispatch('ARTICLE_LIST').then((res) => {
         console.log(res)

@@ -1,7 +1,7 @@
 {
-  "name": "blog.admin",
+  "name": "portal.admin",
   "version": "1.0.0",
-  "description": "我的博客",
+  "description": "官网后台",
   "author": "huwhy <huwhy@foxmail.com>",
   "private": true,
   "scripts": {
