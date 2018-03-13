@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     handleUploadSuccess (res, file) {
-      this.imageUrl = '/file?file=' + res.data
-      this.$emit('upload-success', '/file?file=' + res.data)
+      this.imageUrl = res.data
+      this.$emit('upload-success', res.data)
     },
     beforeUpload (file) {
       const isJPG = file.type === 'image/jpeg'
